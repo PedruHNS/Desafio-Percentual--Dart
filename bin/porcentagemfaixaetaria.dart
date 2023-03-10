@@ -30,7 +30,7 @@ void calcFaixaEtaria(Map<int, dynamic> grupo) {
   int total = grupo.length;
   print("---------------------------------------------");
   print("total de pessoas: $total");
-  print("Até 15 anos:$faixa1 percentual: ${faixa1 / total * 100}%");
+  print("Até 15 anos: $faixa1 percentual: ${faixa1 / total * 100}%");
   print("De 16 a 30 anos: $faixa2 percentual: ${faixa2 / total * 100}%");
   print("De 31 a 45 anos: $faixa3 percentual: ${faixa3 / total * 100}%");
   print("De 46 a 60 anos: $faixa4 percentual: ${faixa4 / total * 100}%");
@@ -38,18 +38,34 @@ void calcFaixaEtaria(Map<int, dynamic> grupo) {
 }
 
 void calcSexo(Map<int, dynamic> grupo) {
-  //TODO em breve;
+  int contMasc = 0, contFem = 0;
+
+  grupo.forEach(
+    (key, value) {
+      if (grupo[key]["sexo"] == "m") {
+        contMasc++;
+      } else {
+        contFem++;
+      }
+    },
+  );
+  int total = grupo.length;
+  print("---------------------------------------------");
+  print("masculino: $contMasc percentual: ${contMasc / total * 100}%");
+  print("feminino: $contFem percentual: ${contFem / total * 100}%");
 }
+
 void main() {
   Map<int, dynamic> pessoas = {};
   for (int i = 1; i <= 2; i++) {
     pessoas[i] = {};
     pessoas[i]["nome"] = input(mensagem: "qual nome?");
     pessoas[i]["idade"] = int.parse(input(mensagem: "digite a idade"));
-    pessoas[i]["sexo"] = input(mensagem: "digite m = masc / f - fem");
+    pessoas[i]["sexo"] =
+        input(mensagem: "digite m = masc / f - fem").toLowerCase();
     print("--------------------------------------------------------");
   }
   calcFaixaEtaria(pessoas);
 
-  //TODO calcSexo(pessoas);
+  calcSexo(pessoas);
 }
